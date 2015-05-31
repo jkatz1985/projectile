@@ -1,0 +1,108 @@
+<!-- Responsive panel example-->
+
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Project #<%= @project.id %></h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <dl class="dl-horizontal">
+              <dt>Project name</dt>
+              <dd><%= @project.project_name %></dd>
+
+              <dt>User</dt>
+              <dd><%= @project.user_id %></dd>
+
+              <dt>Description</dt>
+              <dd><%= @project.description %></dd>
+
+              <dt>Customer pain</dt>
+              <dd><%= @project.customer_pain %></dd>
+
+              <dt>Status</dt>
+              <dd><%= @project.status %></dd>
+
+              <!-- <dt>Manager</dt>
+              <dd><%= @project.manager_id %></dd>
+ -->
+            </dl>
+            <div class="btn-group btn-group-justified">
+              <a href="/projects" class="btn btn-primary">
+                <i class="fa fa-chevron-left"></i>
+              </a>
+
+              <a href="/projects/<%= @project.id %>/edit" class="btn btn-warning">
+                <i class="fa fa-edit"></i>
+              </a>
+
+              <a href="/delete_project/<%= @project.id %>" class="btn btn-danger" rel="nofollow">
+                <i class="fa fa-trash-o"></i>
+              </a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- End responsive panel example -->
+
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+    <div class="titleBox">
+      <!-- <label>Comment Box</label> -->
+        <button type="button" class="close" aria-hidden="true">&times;</button>
+    </div>
+<!--     <div class="commentBox">
+
+        <p class="taskDescription">Enter your comments here</p>
+    </div> -->
+    <form action="/create_comment" method="post" class="form-horizontal">
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <input class="form-control" name= "comment" type="text" placeholder="Your comments" />
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default">Add Comment</button>
+            </div>
+        </form>
+    <div class="actionBox">
+        <ul class="commentList">
+
+
+         <!--    <li>
+                <div class="commenterImage">
+                  <img src="http://lorempixel.com/50/50/people/6" />
+                </div>
+                <div class="commentText">
+                    <p class="">Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
+
+                </div>
+            </li>
+            <li>
+                <div class="commenterImage">
+                  <img src="http://lorempixel.com/50/50/people/7" />
+                </div>
+                <div class="commentText">
+                    <p class="">Hello this is a test comment and this comment is particularly very long and it goes on and on and on.</p> <span class="date sub-text">on March 5th, 2014</span>
+
+                </div>
+            </li>
+            <li>
+                <div class="commenterImage">
+                  <img src="http://lorempixel.com/50/50/people/9" />
+                </div>
+                <div class="commentText">
+                    <p class="">Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
+
+                </div>
+            </li> -->
+        </ul>
+    </div>
+</div>
+</div>
