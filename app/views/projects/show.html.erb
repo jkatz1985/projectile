@@ -13,8 +13,8 @@
               <dt>Project name</dt>
               <dd><%= @project.project_name %></dd>
 
-              <dt>User</dt>
-              <dd><%= @project.user_id %></dd>
+              <dt>Owner</dt>
+              <dd><%= @project.user.first_name + " " + @project.user.last_name %></dd>
 
               <dt>Description</dt>
               <dd><%= @project.description %></dd>
@@ -25,9 +25,7 @@
               <dt>Status</dt>
               <dd><%= @project.status %></dd>
 
-              <!-- <dt>Manager</dt>
-              <dd><%= @project.manager_id %></dd>
- -->
+
             </dl>
             <div class="btn-group btn-group-justified">
               <a href="/projects" class="btn btn-primary">
@@ -65,43 +63,33 @@
     <form action="/create_comment" method="post" class="form-horizontal">
         <form class="form-inline" role="form">
             <div class="form-group">
+             <!-- Hidden input for authenticity token to protect from forgery -->
+                <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+                <input name="project_id" type="hidden" value="<%= project.project_id] %>">
+                <input name="user_id" type="hidden" value="<%= current_user.id %>">
                 <input class="form-control" name= "comment" type="text" placeholder="Your comments" />
             </div>
             <div class="form-group">
                 <button class="btn btn-default">Add Comment</button>
             </div>
         </form>
+    </form>
     <div class="actionBox">
         <ul class="commentList">
 
+          <table class="table table-hover table-striped">
+          <tr>
+            <th>User</th>
+            <th>comment</th>
+          </tr>
+          <% @project.comments.each do |list| %>
+            <tr>
+              <td><%= @comment.user_id.first_name + " " + comment.user.last_name %></td>
+              <td><%= @comment.comment %></td>
+            </tr>
+          <% end %>
+          </table>
 
-         <!--    <li>
-                <div class="commenterImage">
-                  <img src="http://lorempixel.com/50/50/people/6" />
-                </div>
-                <div class="commentText">
-                    <p class="">Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
-
-                </div>
-            </li>
-            <li>
-                <div class="commenterImage">
-                  <img src="http://lorempixel.com/50/50/people/7" />
-                </div>
-                <div class="commentText">
-                    <p class="">Hello this is a test comment and this comment is particularly very long and it goes on and on and on.</p> <span class="date sub-text">on March 5th, 2014</span>
-
-                </div>
-            </li>
-            <li>
-                <div class="commenterImage">
-                  <img src="http://lorempixel.com/50/50/people/9" />
-                </div>
-                <div class="commentText">
-                    <p class="">Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
-
-                </div>
-            </li> -->
         </ul>
     </div>
 </div>

@@ -18,9 +18,9 @@ class CommentsController < ApplicationController
     @comment.user_id = params[:user_id]
 
     if @comment.save
-      redirect_to "/comments", :notice => "Comment created successfully."
+      redirect_to "/projects/:id", :notice => "Your Comment was posted"
     else
-      render 'new'
+      render '/projects/:id'
     end
   end
 

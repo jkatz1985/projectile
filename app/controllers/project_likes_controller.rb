@@ -17,7 +17,7 @@ class ProjectLikesController < ApplicationController
     @project_like.user_id = params[:user_id]
 
     if @project_like.save
-      redirect_to "/project_likes", :notice => "Project like created successfully."
+      redirect_to "/projects", :notice => "Project like created successfully."
     else
       render 'new'
     end
