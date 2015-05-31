@@ -1,6 +1,8 @@
 class ProjectsController < ApplicationController
   def index
-    @projects = Project.all
+    @my_projects = current_user.projects
+    @all_projects = Project.all
+    @liked_projects = Project.all
   end
 
   def show

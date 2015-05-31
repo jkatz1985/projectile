@@ -4,20 +4,6 @@
     <a href="/projects/new" class="btn btn-lg btn-success"><i class="fa fa-plus"></i></a>
   </h1>
 </div>
-<div role="tabpanel">
-
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">My Projects</a></li>
-    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">All Projects</a></li>
-    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Liked Projects</a></li>
-    <!-- <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li> -->
-  </ul>
-
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="home">
-
 
 <div class="row">
   <div class="col-xs-12">
@@ -27,200 +13,91 @@
 
 <hr>
 
-<div class="row isotope-container">
-<% @projects.each do |project| %>
-<% if project.user_id == current_user.id %>
-  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 isotope-item">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= project.project_name %></h3>
+<div role="tabpanel">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#my_projects" aria-controls="home" role="tab" data-toggle="tab">My Projects</a></li>
+    <li role="presentation"><a href="#all_projects" aria-controls="profile" role="tab" data-toggle="tab">All Projects</a></li>
+    <li role="presentation"><a href="#liked_projects" aria-controls="messages" role="tab" data-toggle="tab">Liked Projects</a></li>
+  </ul>
+
+  <hr>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="my_projects">
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-hover table-striped">
+          <tr>
+            <th>Name</th>
+            <th>User</th>
+            <th>Description</th>
+            <th>Customer Pain</th>
+            <th>Status</th>
+          </tr>
+          <% @my_projects.each do |project| %>
+            <tr>
+              <td><a href="/projects/<%= project.id %>"><%= project.project_name %></a></td>
+              <td><%= project.user.first_name + " " + project.user.last_name %></td>
+              <td><%= project.description %></td>
+              <td><%= project.customer_pain %></td>
+              <td><%= project.status %></td>
+            </tr>
+          <% end %>
+          </table>
+        </div>
       </div>
-      <div class="panel-body">
-        <dl>
-          <dt>Project name</dt>
-          <dd><%= project.project_name %></dd>
+    </div>
 
-          <dt>Creator</dt>
-          <dd><%= project.user.first_name + " " + project.user.last_name %></dd>
+    <div role="tabpanel" class="tab-pane" id="all_projects">
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-hover table-striped">
+          <tr>
+            <th>Name</th>
+            <th>User</th>
+            <th>Description</th>
+            <th>Customer Pain</th>
+            <th>Status</th>
+          </tr>
+          <% @all_projects.each do |project| %>
+            <tr>
+              <td><%= project.project_name %></td>
+              <td><%= project.user.first_name + " " + project.user.last_name %></td>
+              <td><%= project.description %></td>
+              <td><%= project.customer_pain %></td>
+              <td><%= project.status %></td>
+            </tr>
+          <% end %>
+          </table>
+        </div>
+      </div>
+    </div>
 
-          <dt>Description</dt>
-          <dd><%= project.description %></dd>
-
-          <dt>Customer pain</dt>
-          <dd><%= project.customer_pain %></dd>
-
-          <dt>Status</dt>
-          <dd><%= project.status %></dd>
-
-<!--           <dt>Manager</dt>
-          <dd><%= project.manager_id %></dd>
- -->
-        </dl>
-        <div class="btn-group btn-group-justified">
-          <a href="/projects/<%= project.id %>" class="btn btn-primary">
-            <i class="fa fa-search-plus"></i>
-          </a>
-
-          <a href="/projects/<%= project.id %>/edit" class="btn btn-warning">
-            <i class="fa fa-edit"></i>
-          </a>
-
-          <a href="/delete_project/<%= project.id %>" class="btn btn-danger" rel="nofollow">
-            <i class="fa fa-trash-o"></i>
-          </a>
+    <div role="tabpanel" class="tab-pane" id="liked_projects">
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-hover table-striped">
+          <tr>
+            <th>Name</th>
+            <th>User</th>
+            <th>Description</th>
+            <th>Customer Pain</th>
+            <th>Status</th>
+          </tr>
+          <% @liked_projects.each do |project| %>
+            <tr>
+              <td><%= project.project_name %></td>
+              <td><%= project.user.first_name + " " + project.user.last_name %></td>
+              <td><%= project.description %></td>
+              <td><%= project.customer_pain %></td>
+              <td><%= project.status %></td>
+            </tr>
+          <% end %>
+          </table>
         </div>
       </div>
     </div>
   </div>
-<% end %>
-
-  <!-- <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 isotope-item">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= project.project_name %></h3>
-      </div>
-      <div class="panel-body">
-        <dl>
-          <dt>Project name</dt>
-          <dd><%= project.project_name %></dd>
-
-          <dt>Creator</dt>
-          <dd><%= project.user.first_name + " " + project.user.last_name %></dd>
-
-          <dt>Description</dt>
-          <dd><%= project.description %></dd>
-
-          <dt>Customer pain</dt>
-          <dd><%= project.customer_pain %></dd>
-
-          <dt>Status</dt>
-          <dd><%= project.status %></dd>
-
-          <dt>Manager</dt>
-          <dd><%= project.manager_id %></dd>
-
-        </dl>
-        <div class="btn-group btn-group-justified">
-          <a href="/projects/<%= project.id %>" class="btn btn-primary">
-            <i class="fa fa-search-plus"></i>
-          </a>
-
-          <a href="/projects/<%= project.id %>/edit" class="btn btn-warning">
-            <i class="fa fa-edit"></i>
-          </a>
-
-          <a href="/delete_project/<%= project.id %>" class="btn btn-danger" rel="nofollow">
-            <i class="fa fa-trash-o"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div> -->
-<% end %>
 </div>
-
-    <div role="tabpanel" class="tab-pane" id="profile">
-<% @projects.each do |project| %>
-<% if project.user_id != current_user.id %>
-  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= project.project_name %></h3>
-      </div>
-      <div class="panel-body">
-        <dl>
-          <dt>Project name</dt>
-          <dd><%= project.project_name %></dd>
-
-          <dt>Creator</dt>
-          <dd><%= project.user.first_name + " " + project.user.last_name %></dd>
-
-          <dt>Description</dt>
-          <dd><%= project.description %></dd>
-
-          <dt>Customer pain</dt>
-          <dd><%= project.customer_pain %></dd>
-
-          <dt>Status</dt>
-          <dd><%= project.status %></dd>
-
-<!--           <dt>Manager</dt>
-          <dd><%= project.manager_id %></dd>
- -->
-        </dl>
-        <div class="btn-group btn-group-justified">
-          <a href="/projects/<%= project.id %>" class="btn btn-primary">
-            <i class="fa fa-search-plus"></i>
-          </a>
-
-          <a href="/projects/<%= project.id %>/edit" class="btn btn-warning">
-            <i class="fa fa-edit"></i>
-          </a>
-
-          <a href="/delete_project/<%= project.id %>" class="btn btn-danger" rel="nofollow">
-            <i class="fa fa-trash-o"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-<% end %>
-
-<% end %>
-
-    </div>
-    <div role="tabpanel" class="tab-pane" id="messages">...</div>
-    <div role="tabpanel" class="tab-pane" id="settings">...</div>
-  </div>
-
-</div>
-<!-- Responsive, Isotope-based layout example -->
-</div>
-
-<!-- You can ignore the following. It's a quick and dirty example of how to get a Pinterest-style layout with quick search. -->
-<!-- JavaScript for Isotope layout and quicksearch -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.1.8/imagesloaded.pkgd.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.0.0/isotope.pkgd.min.js"></script>
-<script>
-  $(function() {
-    // quick search regex
-    var qsRegex;
-
-    // init Isotope
-    var $container = $('.isotope-container');
-
-    $container.imagesLoaded(function() {
-      $container.isotope({
-        itemSelector: '.isotope-item',
-        layoutMode: 'masonry',
-        filter: function() {
-          return qsRegex ? $(this).text().match( qsRegex ) : true;
-        }
-      })
-    });
-
-    // use value of search field to filter
-    var $quicksearch = $('#quicksearch').keyup( debounce( function() {
-      qsRegex = new RegExp( $quicksearch.val(), 'gi' );
-      $container.isotope();
-    }, 200 ) );
-
-  });
-
-  // debounce so filtering doesn't happen every millisecond
-  function debounce( fn, threshold ) {
-    var timeout;
-    return function debounced() {
-      if ( timeout ) {
-        clearTimeout( timeout );
-      }
-      function delayed() {
-        fn();
-        timeout = null;
-      }
-      timeout = setTimeout( delayed, threshold || 100 );
-    }
-  }
-</script>
-
-<!-- End responsive, Isotope-based layout example -->
