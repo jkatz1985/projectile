@@ -73,8 +73,8 @@
         <form action="/create_project_like" method="post" class="form-horizontal">
           <!-- Hidden input for authenticity token to protect from forgery -->
           <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-          <input name="user_id" type="hidden" value = "<%= current_user.id %>"
-          <input name="project_id" type="hidden" value = "<%= project.id %>"
+          <input name="user_id" type="hidden" value = "<%= current_user.id %>">
+          <input name="project_id" type="hidden" value = "<%= project.id %>">
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
                 <button class="btn btn-success">

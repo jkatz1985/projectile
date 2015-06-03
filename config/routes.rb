@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :views
   root 'projects#index'
 
   # Routes for the Informed resource:

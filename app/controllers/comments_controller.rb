@@ -14,13 +14,13 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new
     @comment.project_id = params[:project_id]
-    @comment.comment = params[:comment]
+    @comment.comment = params[:new_comment]
     @comment.user_id = params[:user_id]
 
     if @comment.save
-      redirect_to "/projects/:id", :notice => "Your Comment was posted"
+      redirect_to "/projects/#{params[:project_id]}", :notice => "Your Comment was posted"
     else
-      render '/projects/:id'
+      render "/projects/#{params[:project_id]}"
     end
   end
 

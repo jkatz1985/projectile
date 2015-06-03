@@ -64,10 +64,10 @@
         <form class="form-inline" role="form">
             <div class="form-group">
              <!-- Hidden input for authenticity token to protect from forgery -->
-                <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-                <input name="project_id" type="hidden" value="<%= project.project_id] %>">
-                <input name="user_id" type="hidden" value="<%= current_user.id %>">
-                <input class="form-control" name= "comment" type="text" placeholder="Your comments" />
+                <input class="form-control" name= "new_comment" type="text" placeholder="Your comments" >
+                <input class="form-control" name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+            <input class="form-control" name="project_id" type="hidden" value="<%= @project.id %>">
+                <input class="form-control" name="user_id" type="hidden" value="<%= current_user.id %>">
             </div>
             <div class="form-group">
                 <button class="btn btn-default">Add Comment</button>
@@ -81,11 +81,13 @@
           <tr>
             <th>User</th>
             <th>comment</th>
+            <th>posted</th>
           </tr>
-          <% @project.comments.each do |list| %>
+          <% @show_comments.each do |comment| %>
             <tr>
-              <td><%= @comment.user_id.first_name + " " + comment.user.last_name %></td>
-              <td><%= @comment.comment %></td>
+              <td><%= comment.user_id %></td>
+              <td><%= comment.comment %></td>
+              <td><%= time_ago_in_words(comment.created_at) %> ago</td>
             </tr>
           <% end %>
           </table>

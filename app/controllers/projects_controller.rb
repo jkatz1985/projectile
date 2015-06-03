@@ -2,12 +2,16 @@ class ProjectsController < ApplicationController
   def index
     @my_projects = current_user.projects
     @all_projects = Project.all
-    @liked_projects = Project.all
+    @liked_projects = current_user.liked_projects
+    # @project = Project.find(params[:id])
   end
 
   def show
     @project = Project.find(params[:id])
-    @comments = Project.find(params[:id]).comments
+
+    @show_comments = @project.comments.order("created_at DESC")
+
+    @new_comment = Comment.new
 
   end
 
