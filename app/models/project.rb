@@ -1,5 +1,7 @@
 class Project < ActiveRecord::Base
 
+
+
 has_many :likes , :class_name => "Project Like", :foreign_key => "project_id"
 has_many :comments
 has_many :informed

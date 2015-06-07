@@ -60,7 +60,7 @@
             <th>Description</th>
             <th>Customer Pain</th>
             <th>Status</th>
-            <th>     </th>
+
           </tr>
           <% @all_projects.each do |project| %>
             <tr>
@@ -70,6 +70,29 @@
               <td><%= project.customer_pain %></td>
               <td><%= project.status %></td>
               <td>
+
+      <% if project.user_id == current_user.id %>
+
+
+      <% else %>
+        <% if current_user.liked_projects.include?(project) %>
+
+        <form action="/delete_project_like/<%= @project_like %>" method="destroy" class="form-horizontal">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+          <input name="user_id" type="hidden" value = "<%= current_user.id %>">
+          <input name="id" type="hidden" value = "<%= @project_like %>">
+          <input name="project_id" type="hidden" value = "<%= project.id %>">
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-success">
+                 Unlike
+              </button>
+              </div>
+          </div>
+        </form>
+
+        <% else %>
         <form action="/create_project_like" method="post" class="form-horizontal">
           <!-- Hidden input for authenticity token to protect from forgery -->
           <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
@@ -84,8 +107,10 @@
           </div>
         </form>
               </td>
+        <% end %>
             </tr>
           <% end %>
+      <% end %>
           </table>
         </div>
       </div>
@@ -109,6 +134,27 @@
               <td><%= project.description %></td>
               <td><%= project.customer_pain %></td>
               <td><%= project.status %></td>
+              <td>
+              <% if project.user_id == current_user.id %>
+
+                <% else %>
+
+                  <form action="/delete_project_like/<%= @project_like %>" method="destroy" class="form-horizontal">
+                  <!-- Hidden input for authenticity token to protect from forgery -->
+                  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+                  <input name="user_id" type="hidden" value = "<%= current_user.id %>">
+                  <input name="id" type="hidden" value = "<%= @project_like %>">
+                  <input name="project_id" type="hidden" value = "<%= project.id %>">
+                    <div class="form-group">
+                      <div class="col-sm-offset-2 col-sm-10">
+                        <button class="btn btn-success">
+                         Unlike
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+              </td>
+              <% end %>
             </tr>
           <% end %>
           </table>

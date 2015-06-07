@@ -17,9 +17,9 @@ class ProjectLikesController < ApplicationController
     @project_like.user_id = params[:user_id]
 
     if @project_like.save
-      redirect_to "/projects", :notice => "Project like created successfully."
+      redirect_to "/projects", :notice => "You liked a project!"
     else
-      render 'new'
+      redirect_to "/projects", :alert => "You have already liked this project"
     end
   end
 
@@ -42,9 +42,9 @@ class ProjectLikesController < ApplicationController
 
   def destroy
     @project_like = ProjectLike.find(params[:id])
-
+    @project_like.id = ProjectLike.find(params[:id]).id
     @project_like.destroy
 
-    redirect_to "/project_likes", :notice => "Project like deleted."
+    redirect_to "/project_likes", :notice => "You Unliked a project!"
   end
 end
