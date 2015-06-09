@@ -1,7 +1,7 @@
 <!-- Responsive panel example-->
 
 <div class="row">
-  <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+  <div class="col-sm-4 col-md-4">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title"><%= @project.project_name %></h3>
@@ -55,13 +55,69 @@
       </div>
     </div>
   </div>
+
+    <div class="col-sm-4 col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"> Current Resources </h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <dl class="dl-horizontal">
+
+              <% @resources.each do |resource| %>
+
+                <dt>Name</dt>
+                <dd><%= resource.user.first_name + " " + resource.user.last_name %></dd>
+                <dt>Key Question</dt>
+                <dd><%= resource.resource_question %></dd>
+                <dt>______________</dt>
+                <dd> _______________ </dd>
+
+              <% end %>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4 col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"> Informed Parties </h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <dl class="dl-horizontal">
+
+              <% @informeds.each do |informed| %>
+
+                <dt>Name</dt>
+                <dd><%= informed.user.first_name + " " + informed.user.last_name %></dd>
+                <dt>______________</dt>
+                <dd> _______________ </dd>
+
+              <% end %>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
 </div>
 
 <!-- End responsive panel example -->
 
+<% if @project.user_id != current_user.id %>
+
+  <% else %>
 
 <div class="row">
-  <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+  <div class="col-sm-6 col-md-5">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Add Project Resource</h3>
@@ -78,7 +134,7 @@
             </label>
             <div class="col-sm-10">
 
-            <%= select_tag(:user_id, options_from_collection_for_select(User.order("last_name ASC"), :id, :last_name), :class => "form-control") %>
+            <%= select_tag(:user_id, options_from_collection_for_select(User.order("last_name ASC"), :id, :full_name), :class => "form-control") %>
 
             </div>
           </div>
@@ -105,13 +161,51 @@
       </div>
     </div>
   </div>
+
+  <div class="col-sm-6 col-md-5">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Add Informed Party</h3>
+      </div>
+      <div class="panel-body">
+        <form action="/create_informed" method="post" class="form-horizontal">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+          <input name="project_id" type="hidden" value= "<%= @project.id %>">
+
+          <div class="form-group">
+            <label for="informed" class="col-sm-2 control-label">
+              Informed Party
+            </label>
+            <div class="col-sm-10">
+
+            <%= select_tag(:user_id, options_from_collection_for_select(User.order("last_name ASC"), :id, :full_name), :class => "form-control") %>
+
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button class="btn btn-success">
+                Create Informed
+              </button>
+
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
+<% end %>
 
 
 
 
 <div class="row">
-  <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+  <div class="col-sm-12 col-md-10">
     <div class="titleBox">
       <!-- <label>Comment Box</label> -->
         <button type="button" class="close" aria-hidden="true">&times;</button>

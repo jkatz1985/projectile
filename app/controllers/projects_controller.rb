@@ -11,6 +11,8 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @show_comments = @project.comments.order("created_at DESC")
     @new_comment = Comment.new
+    @resources = @project.resources.all
+    @informeds = @project.informeds.all
 
   end
 

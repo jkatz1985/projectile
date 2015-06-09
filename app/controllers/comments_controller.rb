@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to "/projects/#{params[:project_id]}", :notice => "Your Comment was posted"
     else
-      render "/projects/#{params[:project_id]}"
+      redirect_to "/projects/#{params[:project_id]}", :notice => @comment.errors.full_messages.to_sentence
     end
   end
 

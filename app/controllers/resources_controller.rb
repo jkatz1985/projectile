@@ -18,7 +18,7 @@ class ResourcesController < ApplicationController
     @resource.resource_question = params[:resource_question]
 
     if @resource.save
-      redirect_to "/resources", :notice => "Resource created successfully."
+      redirect_to "/projects/#{params[:project_id]}", :notice => "You added a resource!"
     else
       render 'new'
     end

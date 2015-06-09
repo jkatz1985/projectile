@@ -75,22 +75,10 @@
 
 
       <% else %>
-        <% if current_user.liked_projects.include?(project) %>
+        <% project_like = current_user.project_likes.find_by(:project_id => project.id) %>
+        <% if project_like.present? %>
 
-        <form action="/delete_project_like/<%= @project_like %>" method="destroy" class="form-horizontal">
-          <!-- Hidden input for authenticity token to protect from forgery -->
-          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-          <input name="user_id" type="hidden" value = "<%= current_user.id %>">
-          <input name="id" type="hidden" value = "<%= @project_like %>">
-          <input name="project_id" type="hidden" value = "<%= project.id %>">
-            <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-10">
-                <button class="btn btn-success">
-                 Unlike
-              </button>
-              </div>
-          </div>
-        </form>
+        <a href="/delete_project_like/<%= project_like.id %>"  class="btn btn-default">Unlike</a>
 
         <% else %>
         <form action="/create_project_like" method="post" class="form-horizontal">
@@ -139,24 +127,18 @@
 
                 <% else %>
 
-                  <form action="/delete_project_like/<%= @project_like %>" method="destroy" class="form-horizontal">
-                  <!-- Hidden input for authenticity token to protect from forgery -->
-                  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-                  <input name="user_id" type="hidden" value = "<%= current_user.id %>">
-                  <input name="id" type="hidden" value = "<%= @project_like %>">
-                  <input name="project_id" type="hidden" value = "<%= project.id %>">
-                    <div class="form-group">
-                      <div class="col-sm-offset-2 col-sm-10">
-                        <button class="btn btn-success">
-                         Unlike
-                        </button>
-                      </div>
-                    </div>
-                  </form>
+        <% project_like = current_user.project_likes.find_by(:project_id => project.id) %>
+        <% if project_like.present? %>
+
+        <a href="/delete_project_like/<%= project_like.id %>"  class="btn btn-default">Unlike</a>
+
+
               </td>
               <% end %>
             </tr>
           <% end %>
+          <% end %>
+
           </table>
         </div>
       </div>

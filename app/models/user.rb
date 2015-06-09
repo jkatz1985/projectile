@@ -14,4 +14,8 @@ has_many :informed_projects, :through => :informed_on , :source => :project
 has_many :resourced_projects, :through => :resource_on , :source => :project
 has_many :comments
 
+
+  def full_name
+    return "#{self.first_name} #{self.last_name}"
+  end
 end
