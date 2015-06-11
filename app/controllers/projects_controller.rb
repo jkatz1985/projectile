@@ -32,7 +32,7 @@ class ProjectsController < ApplicationController
     if @project.save
       redirect_to "/projects", :notice => "Project created successfully."
     else
-      render 'new'
+      render 'new', :notice => @project.errors.full_messages.to_sentence
     end
   end
 

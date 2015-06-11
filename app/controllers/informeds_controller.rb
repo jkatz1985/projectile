@@ -19,7 +19,7 @@ class InformedsController < ApplicationController
     if @informed.save
       redirect_to "/projects/#{params[:project_id]}", :notice => "You created an informed party!"
     else
-      render 'new'
+      redirect_to "/projects/#{params[:project_id]}", :notice => "That Person is already informed on this project!"
     end
   end
 

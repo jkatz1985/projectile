@@ -20,7 +20,7 @@ class ResourcesController < ApplicationController
     if @resource.save
       redirect_to "/projects/#{params[:project_id]}", :notice => "You added a resource!"
     else
-      render 'new'
+      redirect_to "/projects/#{params[:project_id]}", :notice => "Please include a NEW resource and a key question!"
     end
   end
 

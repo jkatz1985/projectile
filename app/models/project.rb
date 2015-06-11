@@ -1,5 +1,10 @@
 class Project < ActiveRecord::Base
 
+validates :project_name, :presence => true,:uniqueness => { :scope => :user_id }
+validates :description, :presence => true
+validates :customer_pain, :presence => true
+validates :status, :presence => true
+
 
 
 has_many :likes , :class_name => "Project Like", :foreign_key => "project_id"
